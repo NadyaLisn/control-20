@@ -33,13 +33,13 @@
         </div>
         <ul>
           <li class="menu-item">
-            <a href="#1">Пироженки</a>
+            <span (click)="scrollTo(productsElement)">Пироженки</span>
           </li>
           <li class="menu-item">
-            <a href="#2">О нас</a>
+            <span (click)="scrollTo(info)">О нас</span>
           </li>
           <li class="menu-item">
-            <a href="#3">Оформить заказ</a>
+            <span (click)="scrollTo(ordersElement)">Оформить заказ</span>
           </li>
         </ul>
       </nav>
@@ -63,7 +63,7 @@
   </div>
 </section>
 
-<section class="advantages">
+<section class="advantages" #info>
   <div class="container">
     <div class="advantages-text">
       <div class="advantages-title">Мы печём для вас

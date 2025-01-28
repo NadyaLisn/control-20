@@ -68,11 +68,12 @@
   border-bottom: 2px solid rgb(119, 11, 29);
 }
 
-.menu-item a {
+.menu-item span {
   text-decoration: none;
   font-size: 14px;
   font-family: "Gilroy Medium", sans-serif;
   color: rgb(119, 11, 29);
+  cursor: pointer;
 }
 
 .phone {
