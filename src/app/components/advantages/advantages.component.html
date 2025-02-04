@@ -1,0 +1,12 @@
+<section class="advantage">
+  <div class="container">
+    <div class="advantage-item" *ngFor="let advantage of advantages; let i = index;">
+      <div class="circle">
+        <div class="number">{{i+1}}</div>
+      </div>
+      <span>{{ advantage.title }}</span>
+      <p>{{advantage.description | textCustomPipe}}</p>
+    </div>
+
+  </div>
+</section>

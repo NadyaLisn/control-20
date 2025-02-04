@@ -1,0 +1,12 @@
+<div class="choice-item">
+  <img src="/assets/images/{{product.image}} " alt="Макарун">
+  <div class="item-title">{{product.title}}</div>
+  <div class="choice-action">
+    <div class="item-quantity-price">
+      <div>{{product.quantity}}</div>
+      <div>{{product.price | currency: 'руб.' : 'code': '0.2-2': 'ru'}}</div>
+
+    </div>
+    <button class="btn btn-choice" buttonEffect (click)="addToCart()">Заказать</button>
+  </div>
+</div>
