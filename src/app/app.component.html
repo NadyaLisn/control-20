@@ -43,7 +43,8 @@
           </li>
         </ul>
       </nav>
-      <div class="phone">{{ contacts.phone }}</div>
+      <div class="phone">{{ contacts.phone | phoneCustomPipe}}</div>
+
     </div>
   </header>
   <div class="main-macaroons">
@@ -54,7 +55,7 @@
           пироженки Macaroons
         </div>
         <p>Побалуйте себя и своих близких самыми вкусными и ароматными домашними пироженками Macaroon!</p>
-        <button class="btn" (click)="scrollTo(productsElement)">Выбрать макарун</button>
+        <button class="btn" (click)="scrollTo(productsElement)" buttonEffect >Выбрать макарун</button>
       </div>
       <div class="main-image">
         <img src="/assets/images/box-macaroons.png" alt="box">
@@ -80,34 +81,13 @@
   </div>
 </section>
 
-<section class="advantage">
-  <div class="container">
-    <div class="advantage-item" *ngFor="let advantage of advantages; let i = index;">
-      <div class="circle">
-        <div class="number">{{i+1}}</div>
-      </div>
-      <span>{{ advantage.title }}</span>
-      <p>{{advantage.description}}</p>
-    </div>
-
-  </div>
-</section>
+<app-advantages></app-advantages>
 
 <section class="choice" #productsElement>
   <div class="container">
     <div class="choice-title">Выберите свой макарун</div>
     <div class="choice-items">
-      <div class="choice-item" *ngFor="let product of products; let i = index;">
-        <img src="/assets/images/{{product.image}}" alt="Макарун {{i + 1}}">
-        <div class="item-title">{{product.title}}</div>
-        <div class="choice-action">
-          <div class="item-quantity-price">
-            <div>{{product.quantity}}</div>
-            <div>{{product.price}}</div>
-          </div>
-          <button class="btn btn-choice" (click)="addToCart(product, ordersElement)">Заказать</button>
-        </div>
-      </div>
+      <products *ngFor="let product of products" [product]="product" (addToCartEvent)="addOrderEvent($event, product, ordersElement)"></products>
 
     </div>
   </div>
@@ -127,14 +107,16 @@
       </div>
       <div class="form-items">
         <div class="form-text">Ваш выбор</div>
-        <input type="text" placeholder="Напишите, что хотите заказать..." class="order-input"
+
+        <input type="text" placeholder="Напишите, что хотите заказать..."  class="order-input"
                [(ngModel)]="orderInput.productTitle">
+<!--        <p>{{ orderInput.productTitle }}</p>-->
         <div class="form-items form-data">
           <div class="form-text form-data">Заполните данные для заказа</div>
           <input type="text" placeholder="Ваше имя" class="order-input">
           <input type="tel" placeholder="+375(__)___-__-__" class="order-input">
         </div>
-        <button class="btn btn-order">Оформить заказ</button>
+        <button class="btn btn-order" buttonEffect >Оформить заказ</button>
       </div>
     </div>
     <div class="berry-left">
@@ -163,12 +145,14 @@
 
   <div class="present" *ngIf="showPresent">
     <div class="tooltip">
-      Оформите заказ
-      и получите подарок!
+      {{cartService.price | currency: 'руб.' : 'code': '0.2-2': 'ru'}}
     </div>
     <div class="present-img">
-      <img src="assets/images/present.png" alt="Present">
+      <p class="product-amount">{{cartService.amount}}</p>
+      <img src="assets/images/cart.png" alt="Present">
+
     </div>
+
   </div>
 
 </footer>

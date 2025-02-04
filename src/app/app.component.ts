@@ -1,65 +1,34 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {AdvantagesType} from "./types/advantages.type";
-import {NgForOf, NgIf} from "@angular/common";
+import {CurrencyPipe, NgForOf, NgIf} from "@angular/common";
 import {ProductsType} from "./types/products.type";
 import {OrderType} from "./types/order.type";
 import {FormsModule} from "@angular/forms";
 import {ContactsType} from "./types/contacts.type";
+import {ProductsService} from "./serveces/products-service";
+import {ProductsComponent} from "./components/products/products.component";
+import {CartService} from "./serveces/cart-service";
+import {AdvantagesComponent} from "./components/advantages/advantages.component";
+import {ButtonEffectDirective} from "./directives/button-effect.directive";
+import {PhoneCustomPipePipe} from "./pipes/phone-custom.pipe.pipe";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgForOf, FormsModule, NgIf],
+  imports: [RouterOutlet, NgForOf, FormsModule, NgIf, ProductsComponent, FormsModule, AdvantagesComponent, ButtonEffectDirective, PhoneCustomPipePipe, CurrencyPipe],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  providers:[ProductsService]
 })
 export class AppComponent {
-   public advantages: AdvantagesType[] = [
-    {
-      title: 'Лучшие продукты',
-      description: 'Мы честно готовим макаруны только из натуральных и качественных продуктов. Мы не используем консерванты, ароматизаторы и красители.'
-    },
-    {
-      title: 'Много вкусов',
-      description: 'Наша задача – предоставить вам широкое разнообразие вкусов. Вы удивитесь, но у нас более 70 вкусов пироженок.'
-    },
-    {
-      title: 'Бисквитное тесто',
-      description: 'Все пирожные готовятся на бисквитном тесте с качественным сливочным маслом 82,5%. В составе нет маргарина и дрожжей!'
-    },
-    {
-      title: 'Честный продукт',
-      description: 'Вкус, качество и безопасность наших пирогов подтверждена декларацией о соответствии, которую мы получили 22.06.2016 г.'
-    },
-  ];
 
-  public products: ProductsType[] = [
-    {
-      image: 'macaroon1.png',
-      title: 'Макарун с малиной',
-      quantity: '1 шт.',
-      price: '1,70 руб.'
-    },
-    {
-      image: 'macaroon2.png',
-      title: 'Макарун с манго',
-      quantity: '1 шт.',
-      price: '1,70 руб.'
-    },
-    {
-      image: 'macaroon3.png',
-      title: 'Пирог с ванилью',
-      quantity: '1 шт.',
-      price: '1,70 руб.'
-    },
-    {
-      image: 'macaroon4.png',
-      title: 'Пирог с фисташками',
-      quantity: '1 шт.',
-      price: '1,70 руб.'
-    },
-  ];
+  constructor(private productsService: ProductsService, public cartService: CartService) {
+  }
+
+
+
+  public products: ProductsType[] = this.productsService.productsList();
   public orderInput: OrderType = {
     productTitle: '',
     name: '',
@@ -74,7 +43,16 @@ export class AppComponent {
   }
   public showPresent: boolean = true;
   public contacts: ContactsType = {
-    phone: '+375 (29) 368-98-68',
+    phone: '375293689868',
     linkInstagram: 'https://instagram.com/',
   }
+  public addOrderEvent(price: number, product: ProductsType, element: HTMLElement): void {
+    element.scrollIntoView({behavior: 'smooth'});
+    this.cartService.price = price;
+    this.orderInput.productTitle += product.title.toUpperCase() + ', ';
+    alert(this.orderInput.productTitle + "добавлен в корзину");
+  }
+
+
+
 }

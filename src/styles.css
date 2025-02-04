@@ -4,3 +4,57 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: Tavolga;
+  src: url("./assets/fonts/tavolga-free-1.ttf") format("truetype");
+  src: url("./assets/fonts/Tavolgafree.woff") format("woff");
+  src: url("./assets/fonts/Tavolgafree.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url("./assets/fonts/gilroy-regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Gilroy Medium";
+  src: url("./assets/fonts/gilroy-medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Gilroy Bold";
+  src: url("./assets/fonts/gilroy-bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Gilroy ExtraBold";
+  src: url("./assets/fonts/Gilroyextrabold.ttf") format("truetype");
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.btn {
+  width: 240px;
+  /*background-image: linear-gradient(0deg, rgb(113, 8, 30) 0%, rgb(215, 72, 92) 100%);*/
+  padding: 21px 0 21px 0;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-family: "Gilroy bold", sans-serif;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+/*.btn:hover {*/
+/*  box-shadow: 0 5px 9px 1px rgba(130, 19, 40, 0.5);*/
+/*}*/
